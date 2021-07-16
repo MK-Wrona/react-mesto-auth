@@ -49,3 +49,20 @@
 @import url(./blocks/pop-up/__input-box/pop-up__input-box-avatar.css);
 @import url(./blocks/pop-up/__form-error/pop-up__form-error-avatar.css);
 @import url(./blocks/grid/__delete/_hidden/grid__delete_hidden.css);
+@import url(./blocks/pop-up/__infotool-box/pop-up__infotool-box.css);
+@import url(./blocks/initial-page/initial-page.css);
+@import url(./blocks/initial-page/__form/initial-page__form.css);
+@import url(./blocks/initial-page/__input/initial-page__input.css);
+@import url(./blocks/initial-page/__submit/initial-page__submit.css);
+@import url(./blocks/initial-page/__title/initial-page__title.css);
+@import url(./blocks/initial-page/__login/initial-page__login.css);
+@import url(./blocks/header/__box/header__box.css);
+@import url(./blocks/header/__email/header__email.css);
+@import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__signout/header__signout.css);
+@import url(./blocks/pop-up/__reg-pic/pop-up__reg-pic.css);
+@import url(./blocks/pop-up/__reg-text/pop-up__reg-text.css);
+@import url(./blocks/initial-page/__input-box/initial-page__input-box.css);
+@import url(./blocks/initial-page/_register/initial-page_register.css);
+
