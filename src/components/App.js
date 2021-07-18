@@ -143,48 +143,50 @@ function App() {
   }
 
     // функц рега
-    function registration(email, password) {
-      Auth.register(escapeHtml(email), password).then((res) => {
-        if(res.status === 201){
-          handleInfoTooltipContent({iconPath: regIsFine, text: 'Вы успешно зарегистрировались!'})
-          handleInfoTooltipPopupOpen();
-          // редирект на стр входа для повтоного ввода
-          history.push("/sign-in");
-          // свайпнули модалку через 1 сек
-          setTimeout(closeAllPopups, 1000);
-        }
-        if(res.status === 400) {
-          console.log("Вас закибербуллили.")
-        }
-      }).catch((err)=> {
-        handleInfoTooltipContent({iconPath: regIsFailed, text: 'Что-то пошло не так! Попробуйте ещё раз.'})
+  function registration(email, password) {
+    Auth.register(escapeHtml(email), password).then((res) => {
+      if(res.status === 201){
+        handleInfoTooltipContent({iconPath: regIsFine, text: 'Вы успешно зарегистрировались!'})
         handleInfoTooltipPopupOpen();
+        /// редирект на стр входа для повтоного ввода
+        history.push("/sign-in");
+        // свайпнули модалку через 1 сек
         setTimeout(closeAllPopups, 1000);
-        console.log(err)
-      })
-    }
-    // Авторизация 
-    function authorization(email, password) {
-      Auth.authorize(escapeHtml(email), password )
-      .then((data) => {
-        Auth.getContent(data)
-          .then((res) => {
-            setEmail(res.data.email);
-          }).catch(err => console.log(err));
-          setLoggedIn(true);
-          handleInfoTooltipContent({iconPath: regIsFine, text: 'Вы успешно авторизовались!'})
-          handleInfoTooltipPopupOpen();
-          // редирект на главную
-          history.push("/");
-          //свайпнули модалку после редиректа через 1сек
-          setTimeout(closeAllPopups, 1000);
-      }).catch((err) => {
-        handleInfoTooltipContent({iconPath: regIsFailed, text: 'Что то пошло не так!'})
+      }
+      if(res.status === 400) {
+        console.log('Вас закибербуллили.')
+      }
+    }).catch((err)=> {
+      handleInfoTooltipContent({iconPath: regIsFailed, text: 'Что-то пошло не так! Попробуйте ещё раз.'})
+      handleInfoTooltipPopupOpen();
+      setTimeout(closeAllPopups, 2500);
+      console.log(err)
+    })
+  }
+  // Авторизация 
+  function authorization(email, password) {
+    Auth.authorize(escapeHtml(email), password )
+    .then((data) => {
+      if (!data) {
+        throw new Error('Произошла ошибка');
+      }
+      Auth.getContent(data)
+        .then((res) => {
+          setEmail(res.data.email);
+        }).catch(err => console.log(err));
+        setLoggedIn(true);
+        handleInfoTooltipContent({iconPath: regIsFine, text: 'Вы успешно авторизовались!'})
         handleInfoTooltipPopupOpen();
-        console.log(err)
-      })
-    }
-
+         // редирект на главную
+         history.push("/");
+         //свайпнули модалку после редиректа через 1сек
+         setTimeout(closeAllPopups, 1000);
+    }).catch((err) => {
+      handleInfoTooltipContent({iconPath: regIsFailed, text: 'Что то пошло не так!'})
+      handleInfoTooltipPopupOpen();
+      console.log(err)
+    })
+  }
   // log out
   function handleSignOut() {
     setLoggedIn(false);
