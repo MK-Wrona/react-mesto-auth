@@ -29,7 +29,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCa
 
         <div className="grid">
           {/*передаем пропсы*/}
-          {cards.map((card) => <Card  card={card} key={card._id}  onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete}/>)}
+          {cards.map((card) => (<Card  card={card} key={card._id}  onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete}/>))}
         </div>
     </main>
     

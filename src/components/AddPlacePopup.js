@@ -51,11 +51,6 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
             className='pop-up__form-error' 
             id='input-link-error'></span>
             </div>
-          <input 
-            type="submit" 
-            className="pop-up__submit-button" 
-            value="Создать" 
-            name="submit" />
         </PopupWithForm>
   )
 }

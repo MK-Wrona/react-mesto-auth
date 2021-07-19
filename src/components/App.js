@@ -17,7 +17,7 @@ import InfoToolTip from './InfoToolTip';
 import regIsFine from '../images/yep.svg';
 import regIsFailed from '../images/nope.png';
 
-
+//не уверена, что верно поняла замечание об автологине - я перезагружаю главную страницу и остаюсь в учетке
 
 function App() {
 
@@ -144,18 +144,14 @@ function App() {
 
     // функц рега
   function registration(email, password) {
-    Auth.register(escapeHtml(email), password).then((res) => {
-      if(res.status === 201){
+    Auth.register(escapeHtml(email), password)
+    .then(() => {
         handleInfoTooltipContent({iconPath: regIsFine, text: 'Вы успешно зарегистрировались!'})
         handleInfoTooltipPopupOpen();
         /// редирект на стр входа для повтоного ввода
         history.push("/sign-in");
         // свайпнули модалку через 1 сек
         setTimeout(closeAllPopups, 1000);
-      }
-      if(res.status === 400) {
-        console.log('Вас закибербуллили.Ошибка 400.')
-      }
     }).catch((err)=> {
       handleInfoTooltipContent({iconPath: regIsFailed, text: 'Что-то пошло не так! Попробуйте ещё раз.'})
       handleInfoTooltipPopupOpen();
@@ -173,14 +169,17 @@ function App() {
       Auth.getContent(data)
         .then((res) => {
           setEmail(res.data.email);
-        }).catch(err => console.log(err));
-        setLoggedIn(true);
-        handleInfoTooltipContent({iconPath: regIsFine, text: 'Вы успешно авторизовались!'})
+          setLoggedIn(true);
+        })
+        .then(()=> {
+          handleInfoTooltipContent({iconPath: regIsFine, text: 'Вы успешно авторизовались!'})
         handleInfoTooltipPopupOpen();
          // редирект на главную
          history.push("/");
          //свайпнули модалку после редиректа через 1сек
          setTimeout(closeAllPopups, 1000);
+        })
+        
     }).catch((err) => {
       handleInfoTooltipContent({iconPath: regIsFailed, text: 'Что то пошло не так!'})
       handleInfoTooltipPopupOpen();
@@ -223,8 +222,8 @@ function App() {
           <Route path="/">
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
           </Route>
-        <Footer />
         </Switch>
+        <Footer />
       </div>
           {/*для читаемости отформатировано в столбик*/}
           
