@@ -4,18 +4,18 @@ const checkRequestResult = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Упс, произошла ошибка: ${res.status}`);
+  return Promise.reject(`Error ${res.status}`);
 }
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({email, password})
   })
-  .then(checkRequestResult)
+  //.then(checkRequestResult)
 }; 
 
 export const authorize = (email, password) => {
@@ -25,6 +25,7 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({ email, password })
   })
+  //.then(checkRequestResult)
   .then((res) => {
     if (res.status === 400) {
       throw new Error('Не все поля заполнены');
@@ -32,7 +33,6 @@ export const authorize = (email, password) => {
       throw new Error('Email не зарегистрирован');
     } else return res.json();
   })
-  
   .then((data) => {
     console.log(data)
     if (data.token) {
@@ -40,7 +40,6 @@ export const authorize = (email, password) => {
       return data.token;
     }
   })
-  
 }
 
 export const getContent = (token) => {return fetch(`${BASE_URL}/users/me`, {
@@ -50,6 +49,9 @@ export const getContent = (token) => {return fetch(`${BASE_URL}/users/me`, {
     'Authorization': `Bearer ${token}`,
   },
 })
+.then((res) => {
+  return res.json()
+})
+  //.then(checkRequestResult)
   .then((data) => data)
-  .then(checkRequestResult)
 }

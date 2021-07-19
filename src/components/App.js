@@ -154,7 +154,7 @@ function App() {
         setTimeout(closeAllPopups, 1000);
       }
       if(res.status === 400) {
-        console.log('Вас закибербуллили.')
+        console.log('Вас закибербуллили.Ошибка 400.')
       }
     }).catch((err)=> {
       handleInfoTooltipContent({iconPath: regIsFailed, text: 'Что-то пошло не так! Попробуйте ещё раз.'})
