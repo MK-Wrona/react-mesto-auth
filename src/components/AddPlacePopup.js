@@ -1,7 +1,7 @@
 import PopupWithForm from './PopupWithForm';
 import React from 'react';
 
-function AddPlacePopup({isOpen, onClose, onAddPlace}) {
+function AddPlacePopup({isOpen, onClose, onAddPlace,buttonText}) {
   const nameInput = React.useRef();
   const linkInput = React.useRef();
 
@@ -22,15 +22,10 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
         isOpen={isOpen}
         onClose={onClose}
         handleSubmit={handleSubmit}
+        buttonText={buttonText}
         >
           <div className="pop-up__input-box">
-          <input 
-            ref={nameInput}
-            minLength="1" 
-            maxLength="30" 
-            type="text" 
-            placeholder="Название" 
-            className="pop-up__input pop-up__input_name_title" 
+          <input ref={nameInput} minLength="1" maxLength="30" type="text"  placeholder="Название"   className="pop-up__input pop-up__input_name_title" 
             name="title" 
             id="input-title" 
             required />

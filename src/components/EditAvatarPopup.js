@@ -1,7 +1,7 @@
 import PopupWithForm from './PopupWithForm';
 import React from 'react';
 
-function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
+function EditAvatarPopup({isOpen, onClose, onUpdateAvatar,buttonText}) {
   const avatarInput = React.useRef();
 
   function handleSubmit(e) {
@@ -20,7 +20,10 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
         children=""
         handleSubmit={handleSubmit}
         isOpen={isOpen}
-        onClose={onClose}>
+        onClose={onClose}
+        buttonText={buttonText}
+        >
+        
           <input 
             ref={avatarInput}
             type="url" 
@@ -32,11 +35,7 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
           <span 
             className='pop-up__form-error' 
             id='link-input-avatar-error'></span>
-          <input 
-            type="submit" 
-            className="pop-up__submit-button" 
-            value="Сохранить" 
-            name="submit" />
+          
         </PopupWithForm>
   );
 }

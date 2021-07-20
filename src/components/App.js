@@ -33,6 +33,7 @@ function App() {
   const [message, setMessage] = React.useState({});
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const escapeHtml = require('escape-html')
+  
 
   React.useEffect(() => {
     api.getUserInfo().then(data => setCurrentUser(data))
@@ -231,20 +232,23 @@ function App() {
           isOpen={isEditProfilePopupOpen} 
           onClose={closeAllPopups} 
           onUpdateUser={handleUpdateUser}
+          buttonText="Сохранить"
           /> 
       
         <AddPlacePopup
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
         onAddPlace={handleAddPlaceSubmit}
+        buttonText="Создать"
       />
-       {currentUser &&
+       
           <EditAvatarPopup 
             isOpen={isEditAvatarPopupOpen} 
             onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}   
+            onUpdateAvatar={handleUpdateAvatar}  
+            buttonText="Сохранить"
           /> 
-        }
+        
       <ImagePopup 
         card={selectedCard} 
         onClose={closeAllPopups} />
